@@ -9,6 +9,7 @@ class SaveController extends AdminController
 {
     protected $file;
     protected $Table;
+    protected $tableName;
 
     public function __construct($di)
     {
@@ -16,13 +17,19 @@ class SaveController extends AdminController
 
         $this->file = new file($di);
         $this->Table = new Table($di);
+        $this->tableName = basename(dirname(dirname(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))));
     }
 
     public function index()
     {
-        $select = implode(",", $this->request->get);
 
-        $this->file->file_create($this->Table->getTable($select));
+
+//        echo "<pre>";
+//        print_r($_POST);
+
+        $resultArr = $this->file->getTablesArray($_POST);
+
+        $this->file->file_create($resultArr);
 
         $this->file->file_force_download();
     }

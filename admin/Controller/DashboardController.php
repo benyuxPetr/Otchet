@@ -17,13 +17,6 @@ class DashboardController extends AdminController
 
     public function index()
     {
-
-        $data = $this->table->generateTableHtml();
-
-
-
-        $this->view->render('dashboard', $data);
-
-
+        $this->view->render('dashboard');
     }
 }

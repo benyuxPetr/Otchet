@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <link rel="stylesheet" href="/admin/Assets/css/styles.css">
+    <script type="text/javascript" src="/admin/Assets/js/jquery.js"></script>
 </head>
 <body>
 <div class="back dash">
@@ -16,15 +17,27 @@
             <a class="logout" href="/admin/logout/">Log out</a>
         </div>
         <div class="content">
-            <h1>Tables</h1>
-            <a href="worker/" class="table-item">worker</a>
-            <a href="project/" class="table-item">project</a>
-            <a href="task/" class="table-item">task</a>
+
+
+            <form  class="save_file_form" action="save/" method="POST">
+                <div class="label-group">
+                    <div class="tableHeader">
+                        <?= $tableName ?>
+                    </div>
+                    <?= $check ?>
+                </div>
+                <select class="tableSelect">
+                    <option disabled selected>select table for merge</option>
+                    <?= $options ?>
+                </select>
+                <button class="save" type="submit">Download</button>
+            </form>
         </div>
     </div>
     <div class="footer">
         <img src="/admin/Assets/img/white-logo.png" alt="">
     </div>
+    <script src="/admin/Assets/js/script.js"></script>
 </div>
 </body>
 </html>

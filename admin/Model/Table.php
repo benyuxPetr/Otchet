@@ -8,30 +8,35 @@ use Engine\DI\DI;
 
 class Table extends Controller
 {
-    protected $table;
 
     public function __construct(DI $di)
     {
         parent::__construct($di);
-
-        $this->table = 'workers';
     }
 
-    public function getTable($select = '*'){
+    public function getTable($table, $select = '*'){
         $queryBuilder = new QueryBuilder();
 
-        $sql = $queryBuilder->select($select)->from($this->table)->sql();
+        $sql = $queryBuilder->select($select)->from($table)->orderBy($table.'.id','DESC')->limit(15)->sql();
 
         return $this->db->query($sql, $queryBuilder->values);
     }
 
-    public function generateTableHtml()
+    public function getTableAll($table, $select = '*'){
+        $queryBuilder = new QueryBuilder();
+
+        $sql = $queryBuilder->select($select)->from($table)->orderBy($table.'.id','DESC')->sql();
+
+        return $this->db->query($sql, $queryBuilder->values);
+    }
+
+    public function generateTableHtml($table, $select)
     {
-        $query = $this->getTable();
+        $query = $this->getTable($table, $select);
 
         $tableHtml = $this->buildTable($query);
 
-        $CheckBoxesHtml = $this->ColumCheckBoxes($query);
+        $CheckBoxesHtml = $this->ColumCheckBoxes($table, $query);
 
         return ['table' => $tableHtml,
                 'labels' => $CheckBoxesHtml];
@@ -56,13 +61,27 @@ class Table extends Controller
         return $html;
     }
 
-    public function ColumCheckBoxes($array)
+    public function ColumCheckBoxes($table, $array)
     {
         $html = '';
-        $i = 0;
         foreach($array[0] as $key=>$value){
-            $html .= '<label><input type="checkbox" name="checkbox'.$i.'" value="' . htmlspecialchars($key) . '" checked>' . htmlspecialchars($key) . '</label>';
-            $i++;
+            $html .= '<label><input type="checkbox" name="checkbox['.$table.']['.htmlspecialchars($key).']" value="' . htmlspecialchars($key) . '" checked>' . htmlspecialchars($key) . '</label>';
+        }
+        return $html;
+    }
+
+    public function getOptions($table){
+        $arr = [
+            "worker",
+            "project",
+            "task"
+        ];
+        if(($key = array_search($table,$arr)) !== FALSE){
+            unset($arr[$key]);
+        }
+        $html = '';
+        foreach ($arr as $value){
+            $html .= '<option value="'.$value.'">'.$value.'</option>';
         }
         return $html;
     }

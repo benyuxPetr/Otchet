@@ -172,8 +172,10 @@ body{
 .save_file_form{
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
 }
-.save_file_form button{
+.save_file_form button, .download{
+    margin-top: 20px;
     font-family: Roboto;
     font-weight: 500;
     font-size: 18px;
@@ -192,7 +194,7 @@ body{
     justify-content: center;
     align-items: center;
 }
-.save_file_form button:hover{
+.save_file_form button:hover, .download:hover{
     border-color: #222;
     background: #222;
 }
@@ -202,11 +204,44 @@ body{
     align-items: center;
     font-size: 18px;
     color: #222;
-    padding-right: 40px
 }
 .label-group label{
     margin-right: 20px;
     cursor: pointer;
+    font-family: Roboto;
+    font-size: 18px;
+}
+.tableHeader{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 54px;
+    color: #fff;
+    background-color: #222;
+    border-radius: 6px;
+    font-size: 23px;
+    font-family: Roboto;
+    margin: 20px 0;
+}
+.tableSelect{
+    margin-top: 20px;
+    height: 54px;
+    font-size: 18px;
+    font-family: Roboto;
+    padding-left: 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    outline: none;
+}
+.table-item{
+    display: inline-block;
+    background-color: #222;
+    padding: 20px 40px;
+    margin-right: 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #fff;
     font-family: Roboto;
     font-size: 18px;
 }

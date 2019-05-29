@@ -12,14 +12,14 @@
 <div class="back dash">
     <div class="container">
         <div class="top-line">
-            <a href="/"><img src="/admin/Assets/img/logo.png" alt=""></a>
+            <a href="#" onclick="history.back()"><img src="/admin/Assets/img/logo.png" alt=""></a>
             <a class="logout" href="/admin/logout/">Log out</a>
         </div>
         <div class="content">
-            <h1>Tables</h1>
-            <a href="worker/" class="table-item">worker</a>
-            <a href="project/" class="table-item">project</a>
-            <a href="task/" class="table-item">task</a>
+            <div class="table">
+                <?= $table ?>
+            </div>
+            <a class="download" href="download/">download</a>
         </div>
     </div>
     <div class="footer">
