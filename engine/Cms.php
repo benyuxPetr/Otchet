@@ -44,7 +44,5 @@ class Cms
             exit;
         }
 
-//        print_r($class);
-//        print_r($action);
     }
 }
